@@ -13,7 +13,7 @@ const Todo = require('../model/todo')
 
 
 const getAll = async (req, res, next) => {
-    let todos
+    let todos = await Todo.find()
     return res.status(200).json({ data: todos })
 }
 
