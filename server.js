@@ -6,13 +6,26 @@ const todoRouter = require('./routes/todo-route')
 const { default: mongoose } = require('mongoose')
 
 app.use(bodyParser.json())
+
+
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader(
+//         'Access-Control-Allow-Headers',
+//         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//     );
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+
+//     next();
+// });
+
 app.use(express.static('public'))
 
 app.use('/uploads', express.static('static'))
 app.use('/api', todoRouter)
 
 app.get('/', async (req, res, next) => {
- 
+
     return res.sendFile('./index.html')
 })
 
@@ -24,11 +37,11 @@ app.get('/', async (req, res, next) => {
 mongodbURL = 'mongodb+srv://todoUser:1234546@cluster0.pahqx.mongodb.net/todo?retryWrites=true&w=majority'
 
 
-mongoose.connect(mongodbURL,  { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => {
-    console.log("Connect to Database")
-    app.listen(5500)
-    console.log("listen on port 5500...")
-}).catch(err => {
-    console.log(err)
-})
+mongoose.connect(mongodbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("Connect to Database")
+        app.listen(5500)
+        console.log("listen on port 5500...")
+    }).catch(err => {
+        console.log(err)
+    })
